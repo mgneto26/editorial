@@ -1,0 +1,85 @@
+Neste post irei apresentar os recursos que utilizo para configurar os módulos
+LoRa, separando eles por perfil.
+
+{/* ![RAK mais PICO]({PICOmais}) */}
+
+Em testes, vou utilizar breakouts do tipo RAK4270, RAK3272 e RAK11300. Para
+exemplares brasileiros, escolhi a placa EB0 da fabricante Smart Modular. Não
+investi em baterias e consumo de energia. Os novos dispositivos são alimentados
+pela porta USB do computador ou adaptadores elétricos. Lembrando que estou
+apenas testando equipamentos e criando dashboards.
+
+Tanto os módulos da Smart Modular quanto da RAKWireless, assumem formas
+parecidas de configuração e o primeiro guia utiliza comando AT. Até aqui tudo
+bem, o problema aparece quando precisamos adicionar alguma lógica de programação
+para que os dados dos sensores pudessem ser tratados. Dessa maneira acoplamos um
+microcontrolador externo responsável por resolver a lógica e enviar o resultado
+para o módulo LoRa.
+
+Outra opção seria programar o módulo LoRa pela porta JTAG, assim conseguimos
+alterar o código interno do módulo sem precisar de uma MCU externa. Neste
+primeiro momento, o guia por comandos ATs mais um Raspberry PICO, atenderia pela
+facilidade de implementação.
+
+Em toda construção do sistema, planejei trabalhar com perfis de dispositivos,
+pois dessa maneira é possível configurar templates e também o modelo de envio,
+isto é, quantas vezes ele transmite por minutos ou se transmite por eventos,
+somente quando o sensor muda de estado.
+
+Ao final foi configurado 3 templates fundamentais de dispositivos o qual pode
+ser expandido para uma infinidade de possibilidades. Chamo atenção para perfis
+que demandam de comunicação crítica, estes normalmente no nível do solo ou
+abaixo do solo, fator negativo para a qualidade do sinal LoRa.
+
+Para sensores tipo qualidade do ambiente, onde demanda de acompanhamento
+contínuo, é configurado para enviar de 30 em 30 minutos (ou algum intervalo
+configurado), sem o comprometimento da perda de pacote, apesar de poder
+utilizar. Em tela, é resumido valores calculados do tipo média, valores máximos,
+valores mínimos, etc.
+
+Outro perfil de dispositivo é quando envia sobre eventos. Este não tem a
+necessidade de enviar continuamente, mas sim quando o sensor muda de estado.
+
+A comunicação deve ser mais confiável posto que se ocorrer perda de pacote, a
+informação não será registrada. Dessa maneira, é configurado pra confirmar o
+recebimento do pacote, se passar o tempo pré determinado sem a confirmação de
+recebimento (ack), o dispositivo pode reenviar os dados novamente até que receba
+sua confirmação ou registra um pacote perdido.
+
+O perfil configurado como atuador Class C, acendendo um led no dispositivo LoRa,
+segue o conceito de reconhecimento do ACK através de sua confirmação. Mas além
+disso, também é previsto que o retorno seja confiável o bastante para registrar
+em tela a mudança de estado do led. Ficaria estranho enviar comando para aceder
+o led porém não confirmar se o led foi acendido.
+
+O perfil de rastreadores é considerado complexo, digo detalhado. Ainda não
+finalizei sua aplicação, porém o que foi feito, pode aplicar em um sistema de
+motoboy. Separei cada rota, saída do modoboy, como uma nova rota, calculando sua
+distância e duração. O resultado pode ser visto no App demo.
+
+O primeiro bug que encontrei foi com o sensor de umidade do solo. Quando o
+sensor chega no limite de passar de úmido para seco, ele envia várias vezes a
+informação até firmar em seco. Essa quantidade de envios chegou aproximadamente
+a 150 pacotes, apenas para identificar solo seco. Assim foi necessário elaborar
+uma lógica e enviar somente quando necessário.
+
+![Sensor Smart Modular em jardinagem](/assets/smart.jpg)
+
+Outra aplicação que montei foi o device botton, esse chamei de estresômetro.
+Toda vez que fico estresado, aperto o botão e consigo ver em tela a frequência
+de stress sobre um período de tempo. Também consigo montar um alerta visual,
+toda vez que alguém fizer o cadastro no sistema WEB desse blog, irá acender uma
+luz em meu dispositivo sinalizando um novo cadastro. Algo parecido pode ser
+visto, no vídeo que gravei, testando a classe C para dispositivos LoRa.
+
+Tudo funcionou perfeitamente, realmente a tecnologia LoRaWAN não é tão complexa
+assim e por isso, podemos considerar uma ótima opção para a democratização da
+IoT. Suas funcionalidades são LPWAN e acreditasse que com a chegada da
+tecnologia 5G, novos recursos vão aparecer e LoRaWAN irá continuar no mercado
+devido ao modelo de negócio que LoRa Alliance vem se dedicando, o qual deixo
+aqui meus agradecimentos e minhas contribuições.
+
+Para que consiga finalizar o entendimento desse blog, recomendo visitar o
+aplicativo demo. Aproveite o conteúdo desse blog e mate sua curiosidade em
+visualizar o encontro da inspiração. O Próximo passo será prototipar um
+dispositivo TOP para minha coleção. Até lá

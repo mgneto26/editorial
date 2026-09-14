@@ -1,0 +1,81 @@
+A tecnologia LoRa (Long Range) é uma modulação em camada física baseada em
+espalhamento de espectro por chirps (CSS - Chirp Spread Spectrum). Ela foi
+projetada para ampliar o alcance de comunicação sem fio em dispositivos de
+Internet das Coisas (IoT), sendo a escolha ideal para redes LPWAN (Low-Power
+Wide-Area Networks) que transmitem pequenos volumes de dados a **longas
+distâncias** com baixo consumo de energia.
+
+Diferentemente de modulações de banda estreita tradicionais (como FSK), o LoRa
+utiliza um "sinal chiped" que varia linearmente no tempo. Isso confere ao sinal
+uma característica robusta no domínio da frequência, resultando em um ganho de
+processamento que permite a demodulação mesmo em ambiente com relação
+sinal-ruído negativas ou com muita interferência.
+
+O LoRa combina baixo consumo de energia com uma sensibilidade de recepção
+excepcional, podendo atigir -148dBm em alguns cenários. Suas principais
+vantagens incluem:
+
+- Alcance Extremo: Cobertura de vários quilômetros em áreas urbanas e dezenas de
+  quilômetros em áreas rurais;
+- Custo Reduzido: Opera em banda ISM não licenciadas, eliminando taxas de
+  licenciamento de espectro;
+- Alta luminância: Resistência a ruídos e interferências multipercurso;
+- Eficiência Energética: O uso de ciclos de trabalho (duty cycle) permite que
+  dispositivos alimentados por bateria operam por vários anos sem substituição.
+
+Embora frequentemente usados como sinônimos, eles ocupam níveis diferentes na
+arquitetura de rede:
+
+LoRa, é a modulação na camada física. aonde define como bits são transformados
+em ondas de rádio, focando em parâmetros como largura de banda (BW), fator de
+espalhamento (SF) e taxa de codificação (CR)
+
+LoRaWAN, é o protocolo de comunicação construído sobre LoRa. Ele gerencia a
+estrutura de rede, segurança autenticação e os modos de acesso dos dispositivos
+(Classes A, B e C)
+
+Para otimizar uma rede LoRa, é preciso equilibrar três variáveis principais:
+
+- Fator de Espalhamento (SF): Define o número de "chips" por símbolo. Um SF
+  maior aumenta o alcance e a sensibilidade, mas reduz a taxa de transmissão de
+  dados.
+- Largura de Banda (BW): Canais mais estreitos aumentam a sensibilidade; canais
+  mais largos permitem maior velocidade de transmissão.
+- Taxa de Codificação (CR): Adiciona redundância para correção de erros (FEC),
+  melhorando a confiabilidade do link em canais ruidosos.
+
+A rede LoRaWAN utiliza uma topologia em estrela, onde os dispositivos finais se
+comunicam com gateways, que encaminham os dados para servidores de rede e
+aplicação. O padrão define três classes:
+
+- Classe A (Menor consumo): O dispositivo só abre janelas de recepção logo após
+  enviar um dado (uplink)
+- Classe B: Abre janelas de recepção em intervalos programados.
+- Classe C (Menor latência): Mantém a recepção aberta quase permanentemente,
+  ideal para comandos em tempo real, mas consome mais energia.
+
+O Fator de Espalhamento é um dos parâmetros fundamentais da camada física do
+LoRa e tem um impacto direto e proporcional no alcance da comunicação. De acordo
+com as fontes, a relação entre o SF e o desempenho da rede funciona da seguinte
+maneira. Quanto maior o Fator de Espalhamento, maior será a distância de
+transmissão e a sensibilidade do receptor. Isso ocorre porque em SF mais alto
+utiliza um número maior de "chips" de espalhamento para representar um único
+simbolo de dado.
+
+Esse aumento no número de chips resulta em um maior ganho de processamento, o
+que permite que o sinal seja demodulado com sucesso mesmo em ambientes com
+relação SNR extremamente baixas ou negativas, chegando a até -20dB.
+
+Módulos de alta performance exemplificam essa relação ao atingir uma
+sensibilidade de -138dBm quando configurados em SF=11. Isso garante que o sinal
+percorra distância maiores e supere interferências em ambientes complexos.
+
+Embora um SF mais alto aumente o alcance e a robustez, ele reproduz a taxa de
+transmissão de dados. Ou seja, para ganhar mais quilômetros de cobertura, o
+dispositivo levará mais tempo para transmitir a mesma quantidade de informação.
+
+Em resumo, o Fator de Espalhamento permite que os desenvolvedores ajustem o
+equilíbrio entre velocidade e distância. Valores de SF mais baixos (como SF5)
+são usados para comunicações mais rápidas e próximas, enquanto valores mais
+altos (até SF11) são essenciais para atingir alcances extremos em áreas rurais
+ou urbanas densas.

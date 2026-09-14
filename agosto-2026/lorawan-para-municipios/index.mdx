@@ -1,0 +1,90 @@
+> Imagine gerenciar milhões de dispositivos conectados enviando dados em tempo
+> real. Agora, imagine fazer isso funcionar perfeitamente em uma metrópole como
+> São Paulo e, ao mesmo tempo, em uma fazenda isolada no interior do país. Esse
+> é o grande desafio da Internet das Coisas (IoT) hoje: não existe uma
+> tecnologia única que resolva tudo.
+
+Recentemente, o megaprojeto da Sabesp chamou minha atenção ao anunciar a
+instalação de 4,4 milhões de medidores inteligentes usando o novo padrão de eSIM
+SGP.32 e protocolos abertos sobre a rede celular. Isso acendeu um alerta. Se as
+grandes empresas e capitais estão apostando fichas no ecossistema celular (como
+o NB-IoT e o 5G), ainda há espaço para tecnologias como o LoRaWAN?
+
+A resposta curta é: com certeza. Mas o segredo está em entender a geografia e a
+densidade do seu projeto. Vamos entender como essa divisão funciona na prática.
+
+Nas metrópoles, as operadoras de telecomunicações investem pesado na
+infraestrutura celular. O 5G foi projetado desde o início para suportar o
+chamado IoT massivo (Massive Machine Type Communications ou MMTC).
+
+Digamos que o 5G massivo consegue conectar até 1 milhão de dispositivos por
+quilômetro quadrado sem derrubar a rede. Em uma capital saturada de medidores de
+água, luz, gás, bueiros inteligentes e semáforos, só o 5G aguenta esse tranco
+sem interferências.
+
+As operadoras instalam antenas 5G em cada esquina. Para elas, ativar o sinal de
+IoT (como o NB-IoT ou as bandas puras de 5G) nessas antenas existentes custa
+muito pouco, oferecendo cobertura imediata.
+
+Em capitais, a concorrência entre teles é feroz. Se uma empresa quiser trocar de
+operadora usando o novo padrão global SGP.32, o sinal das concorrentes (Claro,
+TIM, Vivo) estará igualmente disponível na rua de cima ou de baixo, permitindo a
+migração de milhões de chips em nuvem de forma instantânea.
+
+O SGP.32 é um recente padrão da GSMA para o gerenciamento remoto de eSIMs focado
+em dispositivos de IoT e M2M. Ele permite baixar, ativar e trocar de operadora à
+distância em aparelhos que não possuem tela ou que contam com recursos limitados
+de bateria e rede.
+
+Diferente do padrão de consumo comum para smartphones (SGP.22), que exige
+escanear um QR code ou interagir com uma interface de usuário, o SGP.32 opera de
+forma automatizada e remota. Além disso, introduz o eIM (eSIM IoT Manager), uma
+camada centralizada na nuvem, e o IPA (IoT Profile Assistent), que gerenciam os
+perfis de rede sem depender de comandos complexos via SMS.
+
+Isso facilita atualizar ou trocar a operadora, elimina a necessidade de visitas
+técnicas ou troca física de chips, economia de bateria e uso da internet para
+trocar mensagens com o chip.
+
+No interior, a realidade muda completamente. As operadoras de celular demoram
+anos para expandir tecnologias novas para cidades pequenas ou áreas rurais,
+focando o investimento onde há mais clientes pagantes. É exatamente aqui que o
+LoRaWAN brilha de forma imbatível.
+
+Digamos que você mesmo pode comprar um Gateway LoRaWAN (uma antena de custo
+acessível), instalá-lo no topo de um prédio, silo ou caixa d'água, e criar a sua
+própria rede privada. Você se torna a sua própria "operadora".
+
+O sinal de rádio LoRaWAN opera em frequências sub-GHz (baixas). No interior,
+onde há poucas barreiras e prédios altos, uma única antena LoRaWAN pode cobrir
+um raio superiores a 2 quilômetros. Com apenas 2 ou 3 antenas, você cobre uma
+cidade inteira do interior ou uma fazenda gigantesca.
+
+Como a rede é sua, você não paga mensalidade por chip ou por tráfego de dados.
+Se você colocar 50 mil medidores inteligentes em uma cidade pequena rodando em
+LoRaWAN próprio, a economia em faturas mensais ao longo dos anos é brutal.
+
+Como o sinal viaja longe usando pouquíssima potência, os sensores podem ficar em
+pastos, poços artesianos ou locais de difícil acesso operando por vários anos
+sem que ninguém precise ir até lá trocar uma pilha.
+
+Nenhuma das duas anula a outra. A escolha se resume a uma conta matemática e
+logística: Vá de NB-IoT/5G se você precisa de cobertura urbana imediata, alta
+densidade de conexões, tráfego de dados mais robusto e quer a flexibilidade de
+gerenciar contratos com grandes operadoras globalmente.
+
+Vá de LoRaWAN se achar melhor ter uma rede própria aonde poderá fomentar novos
+empreendimentos locais, inovação, independência de operadoras de telefonia
+celular, mais autonomia e domínio sobre os dados.
+
+O futuro da IoT não é sobre escolher a tecnologia "mais moderna", mas sim a
+arquitetura certa para o lugar certo.
+
+_Nós aqui do blogIoT iniciamos nossa trajetória em um projeto de pesquisa,
+financiado pela FAPES em conjunto com a UFES. Quando a pesquisa chegou ao final,
+comecei a escrever as primeiras linhas de código. Hoje alvejamos iniciar nossa
+rede com dispositivos comuns, encontrados no mercado brasileiro e ir
+aperfeiçoando com o tempo. Uma coisa é fundamental, não aceitamos perder pacotes
+por falha nossa. Por isso tentamos acompanhar e validar todas as situações
+possíveis até nosso limite. Damos nosso melhor para que a rede funcione com a
+mesma performance que seria uma operadora de celular de grande porte._

@@ -1,0 +1,157 @@
+A tecnologia LoRaWAN mostrou-se bastante imponente e simples de trabalhar. Tão
+certo, que a simplicidade depende do conhecimento de cada um, porém, tentarei
+explicar alguns processos encontrados no projeto GATLogística, recentemente
+executado no Centro de Pesquisa Inovação e Desenvolvimentos (CPID), em
+Cariacica - ES, com o apoio do IFES - Campus Serra e LabTel - UFES, financiado
+pela FAPES no edital FUNCITEC/MCI - RESOLUÇÃO N° 232/2018 e título GATLogistica
+Projeto de Rede IoT.
+
+O objetivo principal do projeto foi validar uma rede LoRaWAN aplicada na
+Logística dos Portos da Região Metropolitana da Grande Vitória (RMGV).
+Utilizamos o software Radio Mobile para calcular / simular a cobertura LoRaWAN
+em toda região, pois o protótipo tinha interesse em futuros investimentos.
+
+Inicialmente teríamos que fazer uma análise da cobertura do sinal wireless que o
+Gateway LoRaWAN consegue abranger. Melhor explicando, Gateway é um nó de rede
+equipado para fazer a interface entre outra rede que usa diferente protocolo de
+comunicação. No nosso caso, o gateway faz a mudança do protocolo LoRa para o
+protocolo UDP, responsável pelo acesso direto ao serviço IP (ou seja internet),
+e vise-versa. Os equipamentos utilizados foram: Gateway da Multitech, Gateway da
+Milesight e dispositivo com sensor GPS da fabricante Libelium, Fig.1.
+
+Configuramos o Gateway para trabalhar em US915MHz, modelo adquirido pelo
+laboratório, com parâmetro regional LoRawWAN dos Estados Unidos, conforme guia
+fornecido pelo fabricante. Foi preciso aumentar o tempo de espera do
+acknowledge(ACK) para 300ms, informação enviada no sentido servidor /
+dispositivo. Sem este aumento de tempo, foi observado alto índice de
+retransmissão.
+
+LoRaWAN é uma tecnologia de rádio frequência para redes de longa distância.
+Conforme especificações técnicas, a área abrangente chega a 3Km em ambientes
+urbanos, e 15Km em ambientes rurais (linha de visada). LoRaWAN também se
+enquadra em tecnologias Low Power WAN (LPWANs), sendo elas: Wi-Fi, NB-IoT,
+Bluetooth, Sigfox e telefonia celular (5G). Suportam alimentação fotovoltaica e
+podem chegar de 5 a 10 anos de funcionamento sem precisar carregar em rede
+elétrica.
+
+A configuração varia conforme os parâmetros regionais estabelecidos pelo órgão
+regulamentador. Aqui no Brasil utilizamos os mesmos parâmetros que a Austrália,
+AU915. Dessa forma, no pior caso, conseguimos enviar pacotes com até 51 bits em
+uma taxa de transmissão de 250 bit/s. Esta medida varia conforme a distância do
+sensor até o gateway. Os dados são criptografados e o canal de comunicação
+compartilhado entre 8 ou 64 dispositivos simultaneamente, acarretando, no final
+das contas, milhares de sensores conectados a rede.
+
+O meio de comunicação wireless trabalha na banda ISM do espectro de frequência.
+Isento de registrar complexo termo de licenciamento para sua instalação, é
+possível configurar uma rede pública ou uma rede privada com LoRaWAN. A potência
+de transmissão máxima chega a +30dBm e a sensibilidade de recepção pode chegar a
+-130dBm.
+
+A novidade para o sistema de transmissão wireless é a capacidade de adaptar a
+taxa de dados (ADR). Isso significa que, quanto mais próximo o sensor estiver da
+estação rádio base (ERB) menor será o tempo de transmissão e consequentemente
+menor será o consumo de energia. O valor do ADR está diretamente relacionado com
+o fator de espalhamento (SF). Aqui no Brasil o SF varia de 7 a 12, sendo 12
+quando o sensor estiver mais distante do gateway ou operando com sinal de
+comunicação fraco.
+
+- Cidades inteligentes
+- Fazendas inteligentes
+- Rastreamento de ativos e animais
+- Automação residencial e predial
+- Indústria 4.0
+- Equipamentos Hospitalares
+- outros
+
+A tecnologia LoRaWAN funciona sobre o princípio básico do sistema Aloha e também
+fornece o compartilhando de canais de comunicação pelo controle de acesso ao
+meio (MAC). Sua modulação protege de possíveis interferências provocadas por
+outros equipamentos que usam a mesma faixa de frequência. A comunicação é
+halfduplex, ou seja, consegue enviar e receber informações em intervalos de
+tempos diferentes.
+
+Inicialmente, o gateway foi interligado com o servidor TTN (The Things Network),
+e os devices da Libelium configurados para enviar informações codificadas no
+padrão Cayenne LPP. Porém, o servidor TTN apresentou problemas do tipo estouro
+de contador, obrigando-nos a um restart do sistema. Como estávamos esperando uma
+estrutura que funciona continuamente, achamos melhor instalar o servidor
+ChirpStack.
+
+O servidor ChirpStack não é apenas um servidor, mas também uma aula de novas
+tecnologias de leitura de dados. Enquanto o TTN entrega tudo pronto para o
+usuário, no ChirpStack é preciso preparar uma base de dados que irá armazenar as
+informações de forma permanente. Como resultado, com o ChirpStack temos o
+domínio sobre a informação.
+
+Porém, infelizmente, neste momento não conseguimos participar diretamente no
+desenvolvimento do sistema WEB, o qual é responsável pela parte de back-end e
+front-end da aplicação. Aparentemente foi implementado o protocolo HTTP e
+apresentado na Plataforma Google Maps. O sistema, também fornece as informações
+decodificadas, assim poderíamos fazer uma analise dos dados da cobertura LoRa.
+Não podemos afirmar que o sistema ficou completamente pronto, pois apresentou
+algumas perdas de pacotes, por conta do sistema, no final. Por esse motivo, não
+conseguimos analisar a perda de pacotes. O servidor foi instalado em uma máquina
+virtual Kernel (KVM) e atribuído um IP estático, para acesso externo, junto a
+Prodest, órgão gestor e executor das atividades de tecnologia da informação e
+comunicação na administração pública do Estado.
+
+Uma das vantagens da tecnologia LoRaWAN, é a facilidade de construir uma estação
+rádio base de baixo custo, se comparado com tecnologias atualmente dominantes. A
+diferença de peso dos equipamentos, facilitam a instalação em pequenos suportes,
+seja em estruturas de torres ou rooftop.
+
+Tivemos acesso a 4 lugares, nos quais conseguimos instalar os gateways e fazer
+os drive test. Este estudo é primordial para a validação da cobertura e
+conclusão do trabalho. Foram colhidas informações do RSSI que posteriormente
+seriam comparadas com valores simulados em software. Os lugares que instalamos
+os gateway foram: FindesLAB, Zaruc Tecnologia, CPID e Morro do Jaburuna, Fig. 2.
+
+O Radio Mobile é uma ferramenta para projetistas de rádio frequência. O sistema
+faz uso de informações de relevo e configuração do sistema de rádio frequência,
+necessárias para o cálculo computacional realizado sobre o método de Longle
+Rice. Ao final do estudo, é possível simular a cobertura do sinal LoRa, em
+lugares estratégicos que posteriormente serão fortes candidatos para a
+instalação real do gateway LoRaWAN.
+
+Parâmetros cruciais que diferenciam cada caso em estudo, são as informações das
+estruturas que estão acima do revelo ( land cover), ou seja, edificações,
+arvores, florestas, etc. Um de nossos objetivos foi chegar em um valor comum,
+entre as cidades: Vitória, Vila Velha, Cariacica e Serra. Este valor é conhecido
+como perda de cidade, e representa a perda que o sinal de rádio sofre ao
+propagar em ambientes urbanos. Tecnicamente falando, efeito de multipercurso,
+desvanecimentos e efeito doppler.
+
+Foi feita uma validação da cobertura, de modo ativa. Onde, prevemos a
+intensidade do sinal, via Radio Mobile, e comparamos com o sinal medido em campo
+experimentalmente, assim é chegado em uma aproximação entre cobertura simulada e
+real, conforme artigo \[1\]. Conhecendo estas premissas, foi decidido deixar uma
+margem de confiabilidade da cobertura, desprezando o sinal no limite do fraco.
+Desta forma, aumentamos a confiabilidade nas predições, Fig. 3.
+
+Assim foi feito para os 4 lugares, onde o gateway foi instalado. Uma comparação
+entre o sinal simulado e o sinal medido experimentalmente, nos mostrou que as
+regiões poderiam, ter alguma semelhança, apesar de existir peculiaridades entre
+elas. Partindo desse conceito, uma Cobertura LoRa simulada, foi expandida
+abrangendo grandes áreas e avenidas da região. Totalizando uma quantidade de 31
+gateways.
+
+Também foi utilizado a fórmula do erro quadrático médio (RMSE), como ferramenta
+estatística para analise de acurácia do dados simulados. Este valor apresentou
+um resultado de 12dB, aceitável para este tipo de modelo.
+
+Foi bastante interessante conhecer a tecnologia LoRaWAN, ela me proporcionou
+novos horizontes em relação a Internet of Things (IoT). Considero que as maiores
+evoluções em relação a tecnologia aplicada, estão em busca de menor consumo de
+energia e uma modulação do sinal avançada. Durante o projeto, conseguimos
+perceber essa evolução.
+
+A localização exata do Gateway, depende muito da negociação comercial com o
+locatário do espaço. Devido a esse processo, é possível ter que reformular a
+simulação em alguns lugares.
+
+Desta forma, posso disser que foi bastante simples fazer um projeto LoRaWAN,
+utilizando bons equipamento e um software para predição de cobertura de rádio.
+Porém para mim ficou faltando a implementação do servidor de rede e a criação de
+um sistema WEB. Desta forma, irei dar continuidade, de forma independente, à
+criação de novas aplicações utilizando LoRaWAN.
